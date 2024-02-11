@@ -1,10 +1,14 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useState } from 'react';
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [mylaminas, setMylaminas] = useState<Array<{
+    movies: Films[],
+    characters: People[],
+    ships: Starship[]
+  }>>([])
+
+  const [isLogin, setIsLogin] = useState<boolean>(false);
 
   return (
     <>
