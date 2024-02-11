@@ -1,16 +1,21 @@
 import { useEffect, useState } from 'react';
 import './App.css'
-import {BrowserRouter, Routes, Route} from "react-router-dom"
+import { BrowserRouter, Routes, Route } from "react-router-dom"
 import Login from './components/Login';
 import Home from './components/Home';
 import Navbar from './components/Navbar';
+import Laminas from './components/Laminas';
 
 function App() {
-  const [mylaminas, setMylaminas] = useState<Array<{
+  const [mylaminas, setMylaminas] = useState<{
     movies: Films[],
     characters: People[],
     ships: Starship[]
-  }>>([])
+  }>({
+    movies: [],
+    characters: [],
+    ships: []
+  })
 
   const [isLogin, setIsLogin] = useState<boolean>(false);
 
@@ -36,10 +41,20 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <Navbar />
+        {
+          isLogin ?
+            <Navbar />
+            : null
+        }
         <Routes>
           <Route path='/' element={!isLogin ? <Login setIsLogin={setIsLogin} /> : <Home laminas={mylaminas} />} /* si el usuario aun,
            no esta loggeado seguira apareciendo el Componente Login, en caso contrario, aparecera el home, con el album */ />
+
+          {
+            isLogin ? // ruta protegida
+              <Route path='/obtener_laminas' element={<Laminas setMyLaminas={setMylaminas} laminas={mylaminas} setTime={setTime} />} />
+              : null
+          }
         </Routes>
       </BrowserRouter>
       {
