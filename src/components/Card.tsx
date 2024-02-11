@@ -26,7 +26,7 @@ export default function Card({ laminas, setSobre, setMylaminas }: {
                         {laminas.characters.map((ch, index) => (
                             <div key={ch.name} className={`${parseInt(ch.url.match(/\/([^\/]+)\/$/)![1]) >= 1 && parseInt(ch.url.match(/\/([^\/]+)\/$/)![1]) <= 30 ? 'bg-yellow-300' : 'bg-gray-600'} overflow-auto rounded-md p-8`}> {/* aplica la misma condicional para le estilo de la lamina */}
                                 <div className="px-12 flex justify-between">
-                                    <h1 className="text-green-500 font-semibold">{ch.name}</h1>
+                                    <h1 className="text-green-500 font-semibold">{ch.name}-Personajes</h1>
                                     {
                                         parseInt(ch.url.match(/\/([^\/]+)\/$/)![1]) >= 1 && parseInt(ch.url.match(/\/([^\/]+)\/$/)![1]) <= 30 ? // si lo que esta dentro de los ultimos dos / es mayor o igual a 1 y menor o igual que 30, entonces se le aplica el especial
                                             <div className="py-2 px-6 rounded-md bg-yellow-500">
@@ -73,7 +73,7 @@ export default function Card({ laminas, setSobre, setMylaminas }: {
                         {laminas.movies.map((mv, index) => (
                             <div key={mv.title} className={`${parseInt(mv.url.match(/\/([^\/]+)\/$/)![1]) >= 1 && parseInt(mv.url.match(/\/([^\/]+)\/$/)![1]) <= 6 ? 'bg-yellow-300' : 'bg-gray-600'} overflow-auto rounded-md p-8`}>
                                 <div className="px-12 flex justify-between">
-                                    <h1 className="text-green-500 mr-8 font-semibold">{mv.title}</h1>
+                                    <h1 className="text-green-500 mr-8 font-semibold">{mv.title}-Peliculas</h1>
                                     {
                                         parseInt(mv.url.match(/\/([^\/]+)\/$/)![1]) >= 1 && parseInt(mv.url.match(/\/([^\/]+)\/$/)![1]) <= 6 ?
                                             <div className="py-2 px-6 rounded-md bg-yellow-500">
@@ -126,7 +126,7 @@ export default function Card({ laminas, setSobre, setMylaminas }: {
                         {laminas.ships.map((sh, index) => (
                             <div key={sh.name} className={`w-[30%] ${sh.url != "Desconocido" && parseInt(sh.url.match(/\/([^\/]+)\/$/)![1]) >= 1 && parseInt(sh.url.match(/\/([^\/]+)\/$/)![1]) <= 10 ? 'bg-yellow-300' : 'bg-gray-600'} overflow-auto rounded-md p-8`}>
                                 <div className="px-12  flex justify-between">
-                                    <h1 className="text-green-500 font-semibold">{sh.name}</h1>
+                                    <h1 className="text-green-500 font-semibold">{sh.name}- Naves</h1>
                                     {
                                         sh.url != "Desconocido" && parseInt( sh.url.match(/\/([^\/]+)\/$/)![1]) >= 1 && parseInt(sh.url.match(/\/([^\/]+)\/$/)![1]) <= 10 ?
                                             <div className="py-2 px-6 rounded-md bg-yellow-500">
