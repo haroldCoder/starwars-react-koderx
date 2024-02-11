@@ -3,6 +3,7 @@ import './App.css'
 import {BrowserRouter, Routes, Route} from "react-router-dom"
 import Login from './components/Login';
 import Home from './components/Home';
+import Navbar from './components/Navbar';
 
 function App() {
   const [mylaminas, setMylaminas] = useState<Array<{
@@ -16,6 +17,7 @@ function App() {
   return (
     <>
       <BrowserRouter>
+        <Navbar />
         <Routes>
           <Route path='/' element={!isLogin ? <Login setIsLogin={setIsLogin} /> : <Home laminas={mylaminas} />} /* si el usuario aun,
            no esta loggeado seguira apareciendo el Componente Login, en caso contrario, aparecera el home, con el album */ />
