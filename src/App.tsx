@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import './App.css'
+import {BrowserRouter, Routes, Route} from "react-router-dom"
+import Login from './components/Login';
 
 function App() {
   const [mylaminas, setMylaminas] = useState<Array<{
@@ -12,7 +14,11 @@ function App() {
 
   return (
     <>
-      <h2>Hello world</h2>
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={<Login setIsLogin={setIsLogin} />} />
+        </Routes>
+      </BrowserRouter>
     </>
   )
 }
