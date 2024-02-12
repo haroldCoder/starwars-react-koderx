@@ -70,10 +70,20 @@ export default function Album({ laminas }: {
 
             <div>
               <h2 className="text-3xl mb-5 text-gray-600 font-semibold">Peliculas</h2>
-              <div className="flex justify-between flex-wrap">
+              <div className="flex gap-4 justify-between flex-wrap">
                 {
                   laminas.movies.length != 0 ?
-                    laminas.movies.map((mv) => ( /* hacer doble mapeo, para acceder a un item especifico */
+                    laminas.movies.sort((a, b)=>{ // crear el sort para ordenar las laminas segun el id de la url
+                      const matchA = a.url.match(/\/([^\/]+)\/$/);
+                      const matchB = b.url.match(/\/([^\/]+)\/$/);
+                    
+                      if (matchA && matchA[1] && matchB && matchB[1]) {
+                        return parseInt(matchA[1]) - parseInt(matchB[1]); // hacer una diferencia entre las distintas laminas
+                      } else {
+                        // Manejo de casos donde las urls no coinciden con el patrón esperado.
+                        return 0;
+                      }
+                    }).map((mv) => ( /* hacer doble mapeo, para acceder a un item especifico */
                       <div key={mv.title} onClick={() => {
                         setUrl({
                           url: url.url == "" ? mv.url : "",
@@ -117,9 +127,19 @@ export default function Album({ laminas }: {
 
             <div>
               <h2 className="text-3xl mb-5 text-gray-600 font-semibold">Personajes</h2>
-              <div className="flex justify-between flex-wrap">
+              <div className="flex gap-4 justify-between flex-wrap">
                 {
-                  laminas.characters.map((ch) => (
+                  laminas.characters.sort((a, b)=>{ // crear el sort para ordenar las laminas segun el id de la url
+                    const matchA = a.url.match(/\/([^\/]+)\/$/);
+                    const matchB = b.url.match(/\/([^\/]+)\/$/);
+                  
+                    if (matchA && matchA[1] && matchB && matchB[1]) {
+                      return parseInt(matchA[1]) - parseInt(matchB[1]);
+                    } else {
+                      // Manejo de casos donde las urls no coinciden con el patrón esperado.
+                      return 0;
+                    }
+                  }).map((ch) => (
                     <div key={ch.name} onClick={() => {
                       setUrl({
                         url: url.url == "" ? ch.url : "",
@@ -157,10 +177,20 @@ export default function Album({ laminas }: {
             {/* sesion de naves */}
             <div>
               <h2 className="text-3xl mb-5 text-gray-600 font-semibold">Naves spaciales</h2>
-              <div className="flex justify-between flex-wrap">
+              <div className="flex gap-4 justify-between flex-wrap">
                 {
                   laminas.ships.length != 0 ?
-                    laminas.ships.map((sh) => (
+                    laminas.ships.sort((a, b)=>{ // crear el sort para ordenar las laminas segun el id de la url
+                      const matchA = a.url.match(/\/([^\/]+)\/$/);
+                      const matchB = b.url.match(/\/([^\/]+)\/$/);
+                    
+                      if (matchA && matchA[1] && matchB && matchB[1]) {
+                        return parseInt(matchA[1]) - parseInt(matchB[1]);
+                      } else {
+                        // Manejo de casos donde las urls no coinciden con el patrón esperado.
+                        return 0;
+                      }
+                    }).map((sh) => (
                       <div key={sh.name} onClick={() => {
                         setUrl({
                           url: url.url == "" ? sh.url : "",
@@ -204,7 +234,7 @@ export default function Album({ laminas }: {
       {
         url.url != "" ?
           <div className="absolute top-[25%] left-[30%] bg-gray-900 rounded-sm py-3 overflow-auto w-[40%] px-12" style={{ backdropFilter: "blur(6px)" }}>
-            <section className="flex justify-end">
+            <section className="flex gap-4 justify-end">
               <button className="text-green-600 hover:text-blue-600 hover:text-xl" onClick={() => setUrl({ url: "", type: "" })}><CloseIcon /></button>
             </section>
             {
