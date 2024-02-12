@@ -27,9 +27,11 @@ function App() {
     seconds: 59
   }) // crear stado para manejar el tiempo de espera para abrir otro sobre.
 
+  const [startTime, setStartTime] = useState<boolean>(false);
+
   useEffect(() => {
     if (time.seconds == 0) {
-      setTime((prev) => {
+      setTime(() => {
         return ({
           minute: 0,
           seconds: 59
@@ -37,6 +39,27 @@ function App() {
       })
     }
   }, [time]) // este useEffect estara atento del el stado del tiempo, en cuanto los segundo lleguen a 0 se vuelve a resetear de fabrica
+
+  useEffect(() => {
+    if (startTime) {
+      const t = setInterval(() => {
+        setTime(prev => {
+          if (prev.seconds == 1) { // cuando el seconds llegue a 0 se limpia el intervalo y ponemos el stado de abrir otro sobre disponible
+            clearInterval(t)
+            setStartTime(false)
+          }
+          return ({
+            minute: prev.minute,
+            seconds: prev.seconds - 1
+          })
+        });
+      }, 1000); // cada segundo el seconds del stado de time, se le restara de a una unidad
+
+
+      return () => clearInterval(t); // Limpia el intervalo al desmontar el componente
+    }
+
+  }, [setTime, startTime]); //crear  el useEffect con las dependencias de si es habilitado abrir el sobre, y el de cambiar el estado del tiempo
 
   return (
     <>
@@ -52,7 +75,7 @@ function App() {
 
           {
             isLogin ? // ruta protegida
-              <Route path='/obtener_laminas' element={<Laminas setMyLaminas={setMylaminas} laminas={mylaminas} setTime={setTime} />} />
+              <Route path='/obtener_laminas' element={<Laminas startTime={startTime} setStartTime={setStartTime} setMyLaminas={setMylaminas} />} />
               : null
           }
         </Routes>

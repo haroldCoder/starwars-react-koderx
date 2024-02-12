@@ -20,6 +20,13 @@ export default function Card({ laminas, setSobre, setMylaminas }: {
 
     return (
         <div>
+            <section className="my-3 flex justify-center">
+                <button onClick={()=>setSobre({ //crear boton para ignorar el sobre, y abrir otro
+                    movies: [],
+                    characters: [],
+                    ships: []
+                })} className=" bg-gradient-to-t text-gray-300 to-slate-800 from-green-600 rounded-md px-6 py-2">Descartar sobre</button>
+            </section>
             {laminas != null ? (
                 <div className="grid grid-cols-1 gap-4">
                     <section className="flex gap-2">
@@ -69,6 +76,7 @@ export default function Card({ laminas, setSobre, setMylaminas }: {
                             </div>
                         ))}
                     </section>
+
                     <section className="my-2 flex gap-2">
                         {laminas.movies.map((mv, index) => (
                             <div key={mv.title} className={`${parseInt(mv.url.match(/\/([^\/]+)\/$/)![1]) >= 1 && parseInt(mv.url.match(/\/([^\/]+)\/$/)![1]) <= 6 ? 'bg-yellow-300' : 'bg-gray-600'} overflow-auto rounded-md p-8`}>
@@ -122,6 +130,7 @@ export default function Card({ laminas, setSobre, setMylaminas }: {
                             </div>
                         ))}
                     </section>
+
                     <section className="my-2 flex gap-2">
                         {laminas.ships.map((sh, index) => (
                             <div key={sh.name} className={`w-[30%] ${sh.url != "Desconocido" && parseInt(sh.url.match(/\/([^\/]+)\/$/)![1]) >= 1 && parseInt(sh.url.match(/\/([^\/]+)\/$/)![1]) <= 10 ? 'bg-yellow-300' : 'bg-gray-600'} overflow-auto rounded-md p-8`}>

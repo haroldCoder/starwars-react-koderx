@@ -3,14 +3,13 @@ import yoda from '../assets/bebeyoda.png';
 import axios from 'axios';
 import Card from './Card';
 
-export default function Sobres({ setMyLaminas, setCountsobres, index, setTime }: {
+export default function Sobres({ setMyLaminas, setCountsobres, index, setStartTime, startTime }: {
+    startTime: boolean,
+    setStartTime: React.Dispatch<React.SetStateAction<boolean>>,
     setMyLaminas: Dispatch<React.SetStateAction<{
         movies: Films[];
         characters: People[];
         ships: Starship[];
-    }>>, setTime: React.Dispatch<React.SetStateAction<{
-        minute: number;
-        seconds: number;
     }>>,
     setCountsobres: React.Dispatch<React.SetStateAction<number[]>>,
     index: number
@@ -24,8 +23,7 @@ export default function Sobres({ setMyLaminas, setCountsobres, index, setTime }:
     }>({ movies: [], characters: [], ships: [] }); // crear stado para el sobre temporal, es decir aqui se guarda los datos del sobre que el usuario le da click
 
     const OpenSobre = async () => {
-        if (isAvailable) { // en caso de que sea habilitado se realiza el proceso, para seleccionar el sobre
-
+        if (isAvailable && !startTime) { // en caso de que sea habilitado se realiza el proceso, para seleccionar el sobre
             //eliminar el sobre presionado
             setCountsobres((prev)=>{
                 prev = prev.filter((_, i)=> i != index)
@@ -33,6 +31,7 @@ export default function Sobres({ setMyLaminas, setCountsobres, index, setTime }:
             }) // usar el set del stado para remover el sobre ya elejido
 
             setIsAvailable(false)
+            setStartTime(true)
             let settings: number = Math.floor((Math.random() * 2) + 1) /* cada ves que se le de click a el sobre se elejira un numero aleatorio(1, 2),
              para ver que cartas deben salir */
             const res: {
@@ -221,32 +220,22 @@ export default function Sobres({ setMyLaminas, setCountsobres, index, setTime }:
         }
     }
 
-    useEffect(() => {
-        if (!isAvailable) { // Si isAvailable es false
-            const t = setInterval(() => {
-                setTime(prev => {
-                    if (prev.seconds == 1) { // cuando el seconds llegue a 0 se limpia el intervalo y ponemos el stado de abrir otro sobre disponible
-                        clearInterval(t)
-                        setIsAvailable(true)
-                    }
-                    return ({
-                        minute: prev.minute,
-                        seconds: prev.seconds - 1
-                    })
-                });
-            }, 1000); // cada segundo el seconds del stado de time, se le restara de a una unidad
-
-
-            return () => clearInterval(t); // Limpia el intervalo al desmontar el componente
+    useEffect(()=>{
+        if(!startTime){
+            setIsAvailable(true)
         }
+    },[startTime])
 
-    }, [isAvailable, setTime]); //crear  el useEffect con las dependencias de si es habilitado abrir el sobre, y el de cambiar el estado del tiempo
+    useEffect(()=>{
+        console.log(isAvailable);
+        
+    },[isAvailable])
 
     return (
         <div onClick={OpenSobre} className={`cursor-pointer h-[50vh] w-[20%] hover:to-green-700 hover:from-green-400 p-20 flex justify-center ${!isAvailable ? 'opacity-90' : null} items-center rounded-md bg-gradient-to-tr to-gray-700 from-black`}>
             <img src={yoda} alt="icon_sobre" />
             {
-                !isAvailable && sobre != null ?
+                isAvailable && sobre.movies.length != 0 || sobre.movies.length != 0 || sobre.ships.length != 0 ?
                     <div className='absolute top-[15%] left-[15%] w-[80%] bg-[#3333338e]' style={{ backdropFilter: "blur(6px)" }}>
                         <Card laminas={sobre} setSobre={setSobre} setMylaminas={setMyLaminas} /> {/* pasar el setMylaminas, por si el usuario, quiere coleccionar alguna lamina */}
                     </div>
