@@ -92,7 +92,7 @@ export default function Card({ laminas, setSobre, setMylaminas }: {
                                 </div>
 
                                 <div className="flex flex-col gap-y-6 p-3">
-                                    <p>skin_color: {mv.director}</p>
+                                    <p>director: {mv.director}</p>
                                     <p>episodes: {mv.episode_id}</p>
                                     <h3>planets: {
                                         mv.planets.map((e) => (

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import error from "../assets/404.png"
+import error from "../assets/notfound.png"
 import CloseIcon from '@mui/icons-material/Close';
 import axios from "axios";
 
@@ -102,16 +102,16 @@ export default function Album({ laminas }: {
                         </div>
 
                         <div className="flex flex-col gap-y-6 p-3">
-                          <p>skin_color: {mv.director}</p>
+                          <p>director: {mv.director}</p>
                           <p>episodes: {mv.episode_id}</p>
                           <h3>planets: {
                             mv.planets.map((e) => (
-                              <p className="text-blue-500">{e}</p>
+                              <p key={e} className="text-blue-500">{e}</p>
                             ))
                           }</h3>
                           <h3>starships: {
                             mv.starships.map((e) => (
-                              <p className="text-blue-500">{e}</p>
+                              <p key={e} className="text-blue-500">{e}</p>
                             ))
                           }</h3>
                           <p>url: {mv.url}</p>
@@ -212,7 +212,7 @@ export default function Album({ laminas }: {
                           <p>consumables: {sh.consumables}</p>
                           <p>films: {
                             sh.films.map((e) => (
-                              <p className="text-blue-600">{e}</p>
+                              <p key={e} className="text-blue-600">{e}</p>
                             ))
                           }</p>
                           <p>url: {sh.url}</p>
@@ -240,16 +240,16 @@ export default function Album({ laminas }: {
             {
               info_lamina?.character != null ?
                 Object.entries(info_lamina.character).map(([key, value]) => (
-                  <p className="text-white text-xl mb-3">{key}: <span className="text-green-600">{value}</span></p>
+                  <p key={key} className="text-white text-xl mb-3">{key}: <span className="text-green-600">{value}</span></p>
                 ))
                 : info_lamina?.movies != null ?
                   Object.entries(info_lamina.movies).map(([key, value]) => (
-                    <p className="text-white text-xl mb-3">{key}: <span className="text-green-600">{value}</span></p>
+                    <p key={key} className="text-white text-xl mb-3">{key}: <span className="text-green-600">{value}</span></p>
                   ))
                   :
                   info_lamina?.ships != null ?
                     Object.entries(info_lamina.ships).map(([key, value]) => (
-                      <p className="text-white text-xl mb-3">{key}: <span className="text-green-600">{value}</span></p>
+                      <p key={key} className="text-white text-xl mb-3">{key}: <span className="text-green-600">{value}</span></p>
                     ))
                     : null
             }
