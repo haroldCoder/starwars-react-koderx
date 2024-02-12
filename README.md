@@ -28,3 +28,54 @@ export default {
 - Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
 - Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
 - Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+
+
+## Getting Started
+
+### Install
+
+Clone project
+
+```bash
+git clone https://github.com/haroldCoder/starwars-react-koderx.git
+```
+
+Access the project directory.
+
+```bash
+cd starwars-react-koderx
+```
+
+Install dependencies.
+
+```bash
+npm install
+```
+
+Serve with hot reload at <http://localhost:5173>.
+
+```bash
+npm run dev
+```
+
+### Lint
+
+```bash
+npm run lint
+```
+
+### Build
+
+```bash
+npm run build
+```
+
+### Test
+
+```bash
+npm run test
+```
+
+## technical requirements
+
+<iframe src="public/PRUEBA DE DESAFÍO PARA DESARROLLADORES WEB FRONTEND.pdf" width="100%" height="600px"></iframe>
