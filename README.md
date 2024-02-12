@@ -78,4 +78,4 @@ npm run test
 
 ## technical requirements
 
-<iframe src="public/PRUEBA DE DESAFÍO PARA DESARROLLADORES WEB FRONTEND.pdf" width="100%" height="600px"></iframe>
+https://docs.google.com/document/d/1W590fugSMtZX2elV62_iV3m6gNPWlYOEOAsPPK5LdWA/edit
